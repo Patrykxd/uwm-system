@@ -20,7 +20,10 @@ class Login extends Controller {
 
     public function auth(LoginValidation $request) {
 
-        if (Auth::attempt(['name' => $request->input('login'), 'password' => $request->input('password')])) {
+        if (Auth::attempt([
+                    'name' => $request->input('login'),
+                    'password' => $request->input('password')
+                ])) {
 
             return redirect('/admin/start');
         } else {
@@ -34,11 +37,10 @@ class Login extends Controller {
             'name' => 'robot',
             'email' => 'krspawlicki@gmail.com',
             'roles' => 1,
-            'password' => Hash::make('RobotHaslo123'),
+            'password' => Hash::make('przykladoweHaslo123'),
             'remember_token' => ''
         );
         User::create($data);
-        echo "dodany";
     }
 
     public function logout() {

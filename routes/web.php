@@ -11,7 +11,7 @@ use App\Console\Commands\CronRobot;
 
 Route::get('/admin/get', function () {
 
-   dd(trim("http://www.wp.pl/","/"));
+   dd('t');
 });
 
 Route::get('/admin/login', 'Admin\Login@index');

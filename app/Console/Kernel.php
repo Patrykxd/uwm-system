@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     
     protected function schedule(Schedule $schedule) {
-        $schedule->command('Cron:start')->sendOutputTo('www/cronlog/log.txt');
+        $schedule->command('Cron:start')->everyMinute();
     }
 
     /**

@@ -27,9 +27,11 @@ class CronRobot {
 
                 $project = Projects::create($p);
             }
+            echo "\n[" . Date('Y-m-d H:i:s') . "] skanowany url: " . $url;
 
             return $project;
         }
+        echo "\n[" . Date('Y-m-d H:i:s') . "] błędny url: " . json_encode($host);
         return false;
     }
 

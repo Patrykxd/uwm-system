@@ -46,16 +46,15 @@ class Cron extends Command {
         if ($result['info']['http_code'] == 301) {
             $result = $this->pageConnection($result['info']['redirect_url']);
         }
-
+        if ($result == false) {
+            $data['status'] = 1;
+            $link->update($data);
+            return false;
+        }
         $data['server_response'] = $result['info']['http_code'];
 
         if ($result['info']['http_code'] != 404) {
             if ($result['info']['http_code'] == 200) {
-
-
-
-
-
 
                 $hrefRelAnchor = $this->parsePage($result['html']);
 
@@ -64,7 +63,7 @@ class Cron extends Command {
                      * sprawdza czy istnieje taki projekt jeśli nie to go dodaje
                      * 
                      */
-                    $project = CronRobot::checkProject($result['info']['url'], $link->projects_id);
+                    // $project = CronRobot::checkProject($result['info']['url'], $link->projects_id);
 
                     foreach ($hrefRelAnchor as $a) {
                         /**
@@ -72,8 +71,8 @@ class Cron extends Command {
                          * jesli nie to go dodaje
                          *
                          */
-                        if (!empty($a['href']) && !empty($a['anchor']) && $project) {
-                            CronRobot::checkLink($project, $a);
+                        if (!empty($a['href']) && !empty($a['anchor']) /*&& $project*/) {
+                            // CronRobot::checkLink($project, $a);
                         }
 
                         if ($a['href'] == $link->refersto && $a['anchor'] == $link->anchor) {
@@ -97,11 +96,14 @@ class Cron extends Command {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-
-
+       
         $data['html'] = curl_exec($ch);
         $data['info'] = curl_getinfo($ch);
-
+        if ($data['html'] === false) {
+            echo 'Curl error: ' . curl_error($ch);
+            return false;
+        }
+        
         curl_close($ch);
         return $data;
     }

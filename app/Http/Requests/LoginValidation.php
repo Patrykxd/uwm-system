@@ -15,11 +15,7 @@ class LoginValidation extends FormRequest {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    
     public function rules() {
         return [
             'login' => 'required|min:4',
@@ -31,8 +27,10 @@ class LoginValidation extends FormRequest {
         return [
             'password.required' => 'Hasło jest wymagane',
             'password.max' => 'Hasło musi zawierać 8 - 30 znaków',
+            'password.min' => 'Hasło musi zawierać 8 - 30 znaków',
             'login.required' => 'Login jest wymagane',
             'login.min' => 'Login musi mieć min :min znaków',
+            'login.max' => 'Login musi mieć max :max znaków',
         ];
     }
 

@@ -14,7 +14,6 @@ class ProjectValidation extends FormRequest {
     public function authorize() {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,8 +21,11 @@ class ProjectValidation extends FormRequest {
      */
     public function rules() {
         return [
-            'project_name' => 'required|max:50',
-            'project_domain' => ['required','regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i']
+            'project_name' => 'required|max:100',
+            'project_domain' => [
+                'required',
+                'regex:/\b(?:(?:https?|http):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'
+            ]
         ];
     }
 

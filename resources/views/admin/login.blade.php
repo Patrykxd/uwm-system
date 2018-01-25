@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <?= Form::password('password', ['class' => 'form-control', 'placeholder' => 'haslo']) ?>
                 </div>
-                <input type="submit" class="btn btn-success">
+                <input type="submit" class="btn btn-success" value="zaloguj">
             </div>
 
         </div>

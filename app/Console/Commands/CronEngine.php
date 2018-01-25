@@ -19,7 +19,6 @@ class CronEngine {
     }
 
     public function getPage($link) {
-
         $result = $this->pageConnection($link->url);
 
         if ($result['info']['http_code'] == 301) {
@@ -34,11 +33,9 @@ class CronEngine {
                 
                 if (count($hrefRelAnchor)) {
                     foreach ($hrefRelAnchor as $a) {
-                        
                         if ($a['href'] == $link->refersto && $a['anchor'] == $link->anchor) {
                             $data['nofollow'] = $a['rel'] == '' ? 'brak' : (string) $a['rel'];
                             $data['status'] = 1;
-                            
                             $link->update($data);
                             break;
                         }
@@ -56,7 +53,6 @@ class CronEngine {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-
 
         $data['html'] = curl_exec($ch);
         $data['info'] = curl_getinfo($ch);

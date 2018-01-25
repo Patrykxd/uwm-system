@@ -7,7 +7,6 @@
 <?php endif; ?>
 
 <?php if (session()->has('success')): ?>
-
     <?php foreach (session('success') as $success): ?>
         <div class="alerts alerts-success" role="alert"  onclick="this.remove()">
             <i class="fa fa-check" aria-hidden="true"></i><strong><?= $success; ?></strong>&nbsp;<b>&times;</b>       

@@ -18,7 +18,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/admin/login')->withErrors(array('Niepoprawny login lub hasło'));
+            return redirect('/admin/login')
+                   ->withErrors(array('Niepoprawny login lub hasło'));
         } 
 
         return $next($request);

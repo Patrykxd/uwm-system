@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Scrapler;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Storage;
+use Illuminate\Pagination\Paginator;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Seo\Projects;
 use App\Http\Models\Seo\Groups;
@@ -13,8 +13,9 @@ use App\Http\Requests\ProjectValidation;
 use App\Http\Requests\LinkValidation;
 use App\Http\Requests\XmlValidation;
 use App\Providers\XmlParserProvider;
+use Storage;
 use Auth;
-use Illuminate\Pagination\Paginator;
+
 
 /**
  * Scrapler controller
@@ -66,7 +67,7 @@ class Scrapler extends Controller {
 
         Projects::create($data);
 
-        return redirect('admin/scrapler/projects');
+        return redirect('admin/scrapler/projects')->with('success', ['Projekt został dodany poprawnie.']);
     }
 
     public function addProjectXML() {
